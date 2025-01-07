@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme of the Year 2024</title>
     <style>
+      /* Existing styles */
       * {
           margin: 0;
           padding: 0;
@@ -30,7 +31,6 @@
           z-index: 1;
       }
 
-      /* Refined Background Animation */
       .squares {
           position: fixed;
           top: 0;
@@ -89,95 +89,44 @@
           text-shadow: 0 0 15px rgba(65, 58, 255, 0.4);
       }
 
-      .form-box {
-          background: white;
-          padding: 1rem;
-          border-radius: 12px;
-          margin: 1.5rem auto;
-          max-width: 400px;
-          transform: perspective(800px) rotateX(3deg);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: pointer;
+      .subtitle {
+          color: white;
+          font-size: clamp(1rem, 2vw, 1.4rem);
+          margin: 1rem 0;
+          opacity: 0.9;
       }
 
-        .vote-button {
-            background: white;
-            padding: 1.2rem 2rem;
-            border-radius: 12px;
-            margin: 1.5rem auto;
-            max-width: 400px;
-            cursor: pointer;
-            transform: translateY(0);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            text-decoration: none;
-            display: block;
-        }
+      .footer {
+          background: rgba(74, 74, 74, 0.8);
+          padding: 1.5rem;
+          margin-top: 1.5rem;
+          border-radius: 12px;
+          backdrop-filter: blur(5px);
+      }
 
-        .vote-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(65, 58, 255, 0.2);
-            border-color: #413AFF;
-        }
+      .creator-info, .status-page {
+          color: white;
+          font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+          margin: 0.8rem 0;
+          opacity: 0.9;
+      }
 
-        .vote-button:active {
-            transform: translateY(0);
-        }
+      /* New styles for locked state */
+      .locked-message {
+          color: #FF6347;
+          font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+          font-weight: 600;
+          margin-top: 2rem;
+      }
 
-        .vote-text {
-            color: #413AFF;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .form-box:hover {
-            transform: perspective(800px) rotateX(0deg) translateY(-5px);
-            box-shadow: 0 10px 30px rgba(65, 58, 255, 0.2);
-        }
-
-        .form-link {
-            color: black;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            font-weight: 600;
-            text-decoration: none;
-            display: block;
-            padding: 0.5rem;
-        }
-
-        .subtitle {
-            color: white;
-            font-size: clamp(1rem, 2vw, 1.4rem);
-            margin: 1rem 0;
-            opacity: 0.9;
-        }
-
-        .footer {
-            background: rgba(74, 74, 74, 0.8);
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-        }
-
-        .creator-info, .status-page {
-            color: white;
-            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-            margin: 0.8rem 0;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .content { padding: 1rem; }
-            .footer { padding: 1rem; }
-        }
+      .locked-button {
+          display: none;
+      }
     </style>
 </head>
 <body>
   <div class="squares">
     <script>
-        // Generate more natural moving squares
         for(let i = 0; i < 12; i++) {
             const square = document.createElement('div');
             square.className = 'square';
@@ -191,15 +140,13 @@
 </div>
     <div class="container">
         <div class="content">
-            <h1 class="title">Meme of the year 2024</h1>
+            <h1 class="title">Meme of the Year 2024</h1>
             
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEj3AdCPtpATP7uQ-G8HwalsrilmbmTOnSoVDUFm_wL8-juA/viewform?usp=header" 
-               class="vote-button" 
-               target="_blank">
-                <div class="vote-text">Click to Vote! 🏆</div>
-            </a>
+            <!-- Button placeholder -->
+            <div id="vote-section">
+                <!-- Button will be replaced by message -->
+            </div>
 
-            <div class="subtitle">To see which meme is won of the year 2024</div>
             <div class="subtitle">This event will end on January 7th</div>
 
             <div class="footer">
@@ -214,5 +161,26 @@
             </div>
           </div>
     </div>
+    <script>
+        // Lock poll logic
+        const isPollClosed = true; // Change to false to enable voting
+        const voteSection = document.getElementById('vote-section');
+
+        if (isPollClosed) {
+            voteSection.innerHTML = `
+                <div class="locked-message">
+                    This poll is closed and no results due there are no results.
+                </div>
+            `;
+        } else {
+            voteSection.innerHTML = `
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEj3AdCPtpATP7uQ-G8HwalsrilmbmTOnSoVDUFm_wL8-juA/viewform?usp=header" 
+                   class="vote-button" 
+                   target="_blank">
+                    <div class="vote-text">Click to Vote! 🏆</div>
+                </a>
+            `;
+        }
+    </script>
 </body>
 </html>
